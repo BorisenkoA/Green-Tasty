@@ -1,0 +1,180 @@
+@use 'app/shared/styles/abstracts/colors' as color;
+
+:host {
+  display: block;
+  min-height: 65vh;
+  padding: 2rem clamp(1rem, 5vw, 4rem) 4rem;
+  background: color.$bg-yellow;
+}
+
+.dish-details {
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  color: color.$neutral-600;
+  font-size: 0.875rem;
+
+  a {
+    color: color.$green-800;
+  }
+}
+
+.dish-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.9fr);
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: color.$neutral-100;
+  box-shadow: 0 1rem 2.5rem rgb(28 55 38 / 10%);
+}
+
+.dish-photo {
+  min-height: 30rem;
+  background: color.$sage-100;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.dish-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: color.$green-800;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  margin: 0;
+  color: color.$neutral-900;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.1;
+}
+
+.description,
+.vitamins {
+  color: color.$neutral-700;
+  line-height: 1.65;
+}
+
+.dish-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1.5rem;
+
+  strong {
+    color: color.$green-800;
+    font-size: 1.75rem;
+  }
+
+  span {
+    color: color.$neutral-600;
+  }
+}
+
+.nutrition {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(3.5rem, 1fr));
+  width: 100%;
+  padding: 1rem 0;
+  border-top: 1px solid color.$neutral-200;
+  border-bottom: 1px solid color.$neutral-200;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  strong {
+    color: color.$neutral-900;
+  }
+
+  span {
+    color: color.$neutral-600;
+    font-size: 0.75rem;
+  }
+}
+
+.vitamins {
+  margin-bottom: 0;
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid color.$green-800;
+  border-radius: 0.625rem;
+  color: color.$green-800;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button--primary {
+  color: white;
+  background: color.$green-800;
+}
+
+.button--quiet {
+  border-color: transparent;
+}
+
+.status-message {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 4rem 1rem;
+  text-align: center;
+
+  h1,
+  p {
+    margin: 0;
+  }
+}
+
+.status-message--error p {
+  color: color.$neutral-700;
+}
+
+@media (max-width: 760px) {
+  .dish-card {
+    grid-template-columns: 1fr;
+  }
+
+  .dish-photo {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+}

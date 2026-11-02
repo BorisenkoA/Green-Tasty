@@ -1,0 +1,82 @@
+<main class="dish-details">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a routerLink="/main">Home</a>
+    <span aria-hidden="true">/</span>
+    <a routerLink="/menu">Menu</a>
+    @if (dish(); as currentDish) {
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ currentDish.name }}</span>
+    }
+  </nav>
+
+  @if (loading()) {
+    <p class="status-message" role="status">Loading dish details…</p>
+  } @else if (errorMessage()) {
+    <section class="status-message status-message--error" role="alert">
+      <h1>Dish unavailable</h1>
+      <p>{{ errorMessage() }}</p>
+      <a routerLink="/menu" class="button button--primary">Explore the menu</a>
+    </section>
+  } @else {
+    @if (dish(); as currentDish) {
+      <article class="dish-card">
+        <div class="dish-photo">
+          <img [src]="currentDish.imageUrl" [alt]="currentDish.name" />
+        </div>
+
+        <section class="dish-copy">
+          <p class="eyebrow">GREEN &amp; TASTY · {{ currentDish.dishType }}</p>
+          <h1>{{ currentDish.name }}</h1>
+          <p class="description">{{ currentDish.description }}</p>
+
+          <div class="dish-price">
+            <strong>{{ currentDish.price | currency: 'USD' }}</strong>
+            <span>{{ currentDish.weight }}</span>
+          </div>
+
+          <div class="nutrition" aria-label="Nutrition information">
+            <div>
+              <strong>{{ formatNutritionValue(currentDish.calories, 'kcal') }}</strong
+              ><span>energy</span>
+            </div>
+            <div>
+              <strong>{{ formatNutritionValue(currentDish.proteins, 'g') }}</strong
+              ><span>protein</span>
+            </div>
+            <div>
+              <strong>{{ formatNutritionValue(currentDish.fats, 'g') }}</strong
+              ><span>fat</span>
+            </div>
+            <div>
+              <strong>{{ formatNutritionValue(currentDish.carbohydrates, 'g') }}</strong
+              ><span>carbs</span>
+            </div>
+          </div>
+
+          @if (currentDish.vitamins) {
+            <p class="vitamins">
+              <strong>Vitamins &amp; minerals:</strong> {{ currentDish.vitamins }}
+            </p>
+          }
+
+          <div class="actions">
+            <button type="button" class="button button--primary" routerLink="/menu">
+              Explore the menu
+            </button>
+            <button
+              type="button"
+              class="button button--secondary"
+              [attr.aria-pressed]="isFavorite()"
+              (click)="toggleFavorite()"
+            >
+              {{ isFavorite() ? '♥ Saved' : '♡ Save favorite' }}
+            </button>
+            <button type="button" class="button button--quiet" (click)="shareDish()">
+              Share dish
+            </button>
+          </div>
+        </section>
+      </article>
+    }
+  }
+</main>

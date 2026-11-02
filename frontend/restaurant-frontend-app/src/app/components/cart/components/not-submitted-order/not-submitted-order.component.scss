@@ -1,0 +1,192 @@
+@use 'app/shared/styles/abstracts/colors' as color;
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.not-submitted-order {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.value {
+  width: 24px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.order-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.order-item-dish {
+  display: flex;
+  flex-direction: row;
+  padding: 24px;
+  gap: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px 4px rgba(194, 194, 194, 0.5);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dish-image {
+  min-width: 96px;
+  height: 96px;
+  border-radius: 400px;
+  box-shadow: 0 0 10px 4px rgba(194, 194, 194, 0.5);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dish-name {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.quantity-buttons {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.value {
+  width: 24px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.total {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 16px;
+}
+
+.body {
+  font-size: 14px;
+  letter-spacing: 0;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+.body-bold {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
+.caption {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
+@media (max-width: 360px) {
+  .order-item-dish {
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .dish-image {
+    flex: 0 0 64px;
+    width: 64px;
+    min-width: 64px;
+    height: 64px;
+  }
+
+  .container {
+    gap: 10px;
+  }
+
+  .body-bold {
+    overflow-wrap: anywhere;
+  }
+
+  .details {
+    min-width: 0;
+    gap: 4px;
+  }
+
+  .dish-name {
+    min-width: 0;
+    gap: 4px;
+  }
+
+  .dish-name .body-bold {
+    overflow-wrap: anywhere;
+  }
+
+  .quantity {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  .quantity-buttons {
+    gap: 0;
+  }
+
+  .value {
+    width: 20px;
+  }
+
+  .total {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

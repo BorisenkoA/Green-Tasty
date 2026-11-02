@@ -1,0 +1,38 @@
+# IDE / editor
+.idea/
+.vscode/
+*.iml
+*.code-workspace
+
+# OS
+.DS_Store
+._*
+Thumbs.db
+
+# Node
+node_modules/
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Local env
+.env
+.env.local
+*.pem
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+
+# .NET build output
+**/bin/
+**/obj/
+
+# Generated deployment artifacts
+backend/restaurant-backend-app/artifacts/*.zip
+**/deployment_resources.json

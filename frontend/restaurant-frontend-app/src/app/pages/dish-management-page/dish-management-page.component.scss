@@ -1,0 +1,380 @@
+@use 'app/shared/styles/abstracts/colors' as color;
+
+:host {
+  display: block;
+  min-height: 70vh;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background: color.$bg-yellow;
+}
+
+.management-page {
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+.page-heading,
+.editor-heading,
+.list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.page-heading {
+  margin-bottom: 1.5rem;
+
+  h1,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    color: color.$neutral-900;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  > div > p:last-child {
+    margin-top: 0.4rem;
+    color: color.$neutral-600;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  color: color.$green-800;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.management-layout {
+  display: grid;
+  grid-template-columns: minmax(20rem, 0.9fr) minmax(24rem, 1.1fr);
+  align-items: start;
+  gap: 1.25rem;
+}
+
+.dish-list-panel,
+.editor-panel {
+  border: 1px solid color.$neutral-200;
+  border-radius: 1rem;
+  background: color.$neutral-100;
+  box-shadow: 0 0.5rem 1.5rem rgb(28 55 38 / 6%);
+}
+
+.dish-list-panel {
+  overflow: hidden;
+}
+
+.list-heading,
+.editor-heading {
+  padding: 1.25rem;
+  border-bottom: 1px solid color.$neutral-200;
+
+  h2 {
+    margin: 0;
+    color: color.$neutral-900;
+    font-size: 1.25rem;
+  }
+}
+
+.list-heading h2 span {
+  margin-left: 0.25rem;
+  color: color.$neutral-600;
+  font-size: 0.875rem;
+}
+
+.search-field input,
+input,
+textarea,
+select {
+  width: 100%;
+  min-height: 2.7rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid color.$neutral-200;
+  border-radius: 0.5rem;
+  color: color.$neutral-900;
+  background: white;
+  font: inherit;
+}
+
+.search-field input {
+  width: min(14rem, 40vw);
+  min-height: 2.4rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.dish-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dish-row {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid color.$neutral-200;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  > img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.65rem;
+    object-fit: cover;
+    background: color.$sage-100;
+  }
+}
+
+.dish-summary {
+  min-width: 0;
+
+  h3,
+  p {
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  h3 {
+    color: color.$neutral-900;
+    font-size: 0.95rem;
+  }
+
+  p {
+    margin: 0.25rem 0;
+    color: color.$neutral-600;
+    font-size: 0.8rem;
+  }
+}
+
+.dish-state {
+  color: color.$green-800;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.dish-state--unavailable {
+  color: #966115;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editor-panel form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.editor-fields {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.editor-panel label {
+  display: grid;
+  gap: 0.4rem;
+  color: color.$neutral-900;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0.9rem;
+  border: 1px solid color.$neutral-200;
+  border-radius: 0.65rem;
+
+  legend {
+    padding: 0 0.35rem;
+    color: color.$neutral-900;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+}
+
+.nutrition-fields .form-grid {
+  margin-bottom: 0.85rem;
+}
+
+.location-picker {
+  display: grid;
+  gap: 0.75rem;
+
+  legend span,
+  .muted {
+    color: color.$neutral-600;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .muted {
+    margin: 0;
+  }
+}
+
+.editor-panel label.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 400;
+
+  input {
+    width: 1rem;
+    min-height: 1rem;
+    margin: 0;
+    accent-color: color.$green-800;
+  }
+}
+
+.image-upload span,
+.image-upload small {
+  color: color.$neutral-600;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.image-upload input {
+  padding: 0.45rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.button,
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid color.$green-800;
+  border-radius: 0.55rem;
+  color: color.$green-800;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button--primary {
+  color: white;
+  background: color.$green-800;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.button--secondary {
+  border-color: color.$neutral-400;
+}
+
+.text-button {
+  min-height: auto;
+  padding: 0.25rem;
+  border-color: transparent;
+}
+
+.text-button--danger {
+  color: #a1372c;
+}
+
+.text-button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d88b83;
+  border-radius: 0.65rem;
+  color: #7e2119;
+  background: #fff3f1;
+}
+
+.list-status {
+  padding: 2rem 1.25rem;
+  color: color.$neutral-600;
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 900px) {
+  .management-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .page-heading,
+  .list-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .search-field,
+  .search-field input {
+    width: 100%;
+  }
+
+  .dish-row {
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    padding: 0.85rem;
+
+    > img {
+      width: 3.25rem;
+      height: 3.25rem;
+    }
+  }
+
+  .row-actions {
+    grid-column: 2;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

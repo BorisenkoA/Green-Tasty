@@ -1,0 +1,228 @@
+<main class="management-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">OWNER WORKSPACE</p>
+      <h1>Menu management</h1>
+      <p>Keep every restaurant menu fresh, accurate, and delicious.</p>
+    </div>
+    <button
+      type="button"
+      class="button button--primary"
+      [disabled]="saving()"
+      (click)="startNewDish()"
+    >
+      + Add a dish
+    </button>
+  </header>
+
+  @if (errorMessage()) {
+    <div class="error-banner" role="alert">
+      <span>{{ errorMessage() }}</span>
+      <button type="button" class="button button--secondary" (click)="loadData()">Try again</button>
+    </div>
+  }
+
+  <div class="management-layout">
+    <section class="dish-list-panel" aria-label="Menu items">
+      <div class="list-heading">
+        <h2>
+          Menu items <span>{{ dishes().length }}</span>
+        </h2>
+        <label class="search-field">
+          <span class="visually-hidden">Search menu</span>
+          <input
+            type="search"
+            [value]="searchText()"
+            (input)="onSearchInput($event)"
+            placeholder="Search dishes"
+          />
+        </label>
+      </div>
+
+      @if (loading()) {
+        <p class="list-status" role="status">Loading menu…</p>
+      } @else if (visibleDishes.length === 0) {
+        <div class="list-status">
+          <p>
+            {{
+              searchText()
+                ? 'No dishes match your search.'
+                : 'Your menu is ready for its first dish.'
+            }}
+          </p>
+          @if (!searchText()) {
+            <button type="button" class="text-button" (click)="startNewDish()">
+              Add your first dish
+            </button>
+          }
+        </div>
+      } @else {
+        <ul class="dish-list">
+          @for (dish of visibleDishes; track dish.id) {
+            <li class="dish-row">
+              <img [src]="dish.imageUrl || 'assets/img/dish.png'" [alt]="dish.name" />
+              <div class="dish-summary">
+                <h3>{{ dish.name }}</h3>
+                <p>{{ dish.dishType }} · {{ dish.price | currency: 'USD' }}</p>
+                <span
+                  class="dish-state"
+                  [class.dish-state--unavailable]="dish.state !== 'Available'"
+                >
+                  {{ dish.state }}
+                </span>
+              </div>
+              <div class="row-actions">
+                <button
+                  type="button"
+                  class="text-button"
+                  [disabled]="saving()"
+                  (click)="editDish(dish)"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="text-button text-button--danger"
+                  (click)="deleteDish(dish)"
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    <section id="dishEditor" class="editor-panel" aria-label="Dish editor">
+      <div class="editor-heading">
+        <div>
+          <p class="eyebrow">{{ editingDishId ? 'UPDATE MENU ITEM' : 'NEW MENU ITEM' }}</p>
+          <h2>{{ editingDishId ? 'Edit dish' : 'Create a dish' }}</h2>
+        </div>
+        @if (editingDishId) {
+          <button type="button" class="text-button" (click)="cancelEdit()">Cancel edit</button>
+        }
+      </div>
+
+      <form #dishForm="ngForm" (ngSubmit)="saveDish()">
+        <fieldset class="editor-fields" [disabled]="saving()">
+          <label>
+            Dish name
+            <input name="name" [(ngModel)]="draft.name" required maxlength="100" />
+          </label>
+
+          <label>
+            Description
+            <textarea
+              name="description"
+              [(ngModel)]="draft.description"
+              required
+              maxlength="1000"
+              rows="3"
+            ></textarea>
+          </label>
+
+          <div class="form-grid">
+            <label>
+              Category
+              <select name="dishType" [(ngModel)]="draft.dishType" required>
+                @for (type of dishTypes; track type) {
+                  <option [value]="type">{{ type }}</option>
+                }
+              </select>
+            </label>
+            <label>
+              Price (USD)
+              <input
+                name="price"
+                type="number"
+                [(ngModel)]="draft.price"
+                required
+                min="0"
+                step="0.01"
+              />
+            </label>
+            <label>
+              Portion size
+              <input name="weight" [(ngModel)]="draft.weight" required placeholder="e.g. 350 g" />
+            </label>
+            <label>
+              Menu status
+              <select name="state" [(ngModel)]="draft.state" required>
+                @for (state of dishStates; track state) {
+                  <option [value]="state">{{ state }}</option>
+                }
+              </select>
+            </label>
+          </div>
+
+          <fieldset class="nutrition-fields">
+            <legend>Nutrition</legend>
+            <div class="form-grid">
+              <label>Calories<input name="calories" [(ngModel)]="draft.calories" required /></label>
+              <label>Protein<input name="proteins" [(ngModel)]="draft.proteins" required /></label>
+              <label>Fat<input name="fats" [(ngModel)]="draft.fats" required /></label>
+              <label
+                >Carbohydrates<input
+                  name="carbohydrates"
+                  [(ngModel)]="draft.carbohydrates"
+                  required
+              /></label>
+            </div>
+            <label
+              >Vitamins &amp; minerals<input name="vitamins" [(ngModel)]="draft.vitamins"
+            /></label>
+          </fieldset>
+
+          <fieldset class="location-picker">
+            <legend>Available at <span>(choose at least one)</span></legend>
+            @if (locations().length === 0) {
+              <p class="muted">No restaurant locations are available.</p>
+            } @else {
+              @for (location of locations(); track location.id) {
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    [checked]="draft.locationIds.includes(location.id)"
+                    (change)="toggleLocation(location.id, $event)"
+                  />
+                  <span>{{ location.address }}</span>
+                </label>
+              }
+            }
+          </fieldset>
+
+          <label class="image-upload">
+            Dish photo <span>(optional, max 5 MB)</span>
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,image/tiff"
+              (change)="onImageSelected($event)"
+            />
+            @if (imageFileName) {
+              <small>Selected: {{ imageFileName }}</small>
+            } @else if (editingDishId) {
+              <small>Leave empty to keep the current photo.</small>
+            }
+          </label>
+        </fieldset>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="button button--primary"
+            [disabled]="dishForm.invalid || saving()"
+          >
+            {{ saving() ? 'Saving…' : editingDishId ? 'Save changes' : 'Add to menu' }}
+          </button>
+          @if (editingDishId) {
+            <button type="button" class="button button--secondary" (click)="cancelEdit()">
+              Cancel
+            </button>
+          }
+        </div>
+      </form>
+    </section>
+  </div>
+</main>

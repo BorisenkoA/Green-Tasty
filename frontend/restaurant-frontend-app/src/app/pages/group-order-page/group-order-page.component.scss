@@ -1,0 +1,168 @@
+@use 'app/shared/styles/abstracts/colors' as color;
+
+.page {
+  box-sizing: border-box;
+  width: min(100% - 32px, 920px);
+  margin: 32px auto;
+  padding: 32px;
+  background: color.$neutral-100;
+  border-radius: 20px;
+  box-shadow: 0 2px 14px color.$shadow;
+}
+
+.page-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid color.$green-150;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 500;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.collecting {
+  color: color.$green-800;
+  background: color.$green-100;
+}
+
+.sent {
+  color: color.$neutral-700;
+  background: color.$neutral-200;
+}
+
+.reservation-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 16px;
+}
+
+.reservation-details span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reservation-details img {
+  width: 18px;
+  height: 18px;
+}
+
+.pending-notice {
+  margin: 20px 0;
+  padding: 14px 16px;
+  color: color.$neutral-900;
+  background: color.$orange-30;
+  border: 1px solid color.$orange-100;
+  border-radius: 9px;
+}
+
+.participants {
+  display: grid;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.consolidated {
+  padding: 20px 0 0;
+  border-top: 1px solid color.$green-150;
+}
+
+.consolidated h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.consolidated-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.consolidated-items li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid color.$neutral-200;
+}
+
+.quantity {
+  color: color.$neutral-600;
+}
+
+.empty-order {
+  color: color.$neutral-600;
+}
+
+.grand-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0;
+  color: color.$green-800;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.state-message {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  min-height: 160px;
+  align-content: center;
+  text-align: center;
+}
+
+.error-state p {
+  margin: 0;
+}
+
+.submit-error {
+  color: color.$red-400;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .page {
+    width: calc(100% - 16px);
+    margin: 8px auto;
+    padding: 18px 12px;
+    border-radius: 14px;
+  }
+
+  .reservation-details {
+    display: grid;
+    gap: 10px;
+  }
+
+  .grand-total {
+    font-size: 24px;
+  }
+
+  .dialog-actions {
+    flex-direction: column-reverse;
+  }
+}
