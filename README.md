@@ -1,10 +1,16 @@
-# Deployment Guide
+# Green Tasty
 
-## Run the application locally
+## Run the application locally without AWS
 
-The quickest way to open Green Tasty in a browser is to run the Angular
-frontend. Install Node.js 24.16 or newer in the 24.x line, then run these
-commands from the repository root:
+The local development API does not require AWS credentials or an AWS account.
+Install Python 3 and Node.js 24.16 or newer in the 24.x line. Start the API
+from the repository root:
+
+```bash
+python3 backend/local-api/server.py
+```
+
+In a second terminal, start the Angular frontend:
 
 ```bash
 cd frontend/restaurant-frontend-app
@@ -12,13 +18,14 @@ npm ci
 npm start
 ```
 
-Open [http://localhost:4200](http://localhost:4200). The frontend uses the
-development API URL configured in
-`frontend/restaurant-frontend-app/src/environments/environment.development.ts`;
-you do not need to deploy the frontend or install AWS tools just to start it.
-Some features require the development API to be available.
+Open [http://localhost:4200](http://localhost:4200), register an account, and
+sign in with that account. The local API seeds locations and popular dishes on
+first start and persists users in SQLite. See
+[`backend/local-api/README.md`](backend/local-api/README.md) for details and
+the local admin-account setup.
 
-The backend and AWS infrastructure deployment steps are documented below.
+The original AWS backend and infrastructure deployment steps are documented
+below.
 
 This repo uses three deployment tracks:
 

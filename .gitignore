@@ -33,6 +33,11 @@ crash.*.log
 **/bin/
 **/obj/
 
+# Local development API data and credentials
+backend/local-api/data/
+**/__pycache__/
+*.py[cod]
+
 # Generated deployment artifacts
 backend/restaurant-backend-app/artifacts/*.zip
 **/deployment_resources.json

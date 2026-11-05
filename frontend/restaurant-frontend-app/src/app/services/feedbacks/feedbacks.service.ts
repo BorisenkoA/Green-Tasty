@@ -44,8 +44,10 @@ export class FeedbacksService {
     return this.http.get<FeedbackResponse>(`${this.baseUrl}/feedback`, { params });
   }
 
-  getFeedbackByReservation(reservationId: string): Observable<FeedbackReservationResponseItem> {
-    return this.http.get<FeedbackReservationResponseItem>(
+  getFeedbackByReservation(
+    reservationId: string
+  ): Observable<FeedbackReservationResponseItem | null> {
+    return this.http.get<FeedbackReservationResponseItem | null>(
       `${this.baseUrl}/reservations/${reservationId}/feedback`
     );
   }
