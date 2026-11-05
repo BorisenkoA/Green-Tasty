@@ -118,8 +118,8 @@ export class MainPageComponent implements OnInit {
       });
 
       this.feedbackService.getFeedbackByReservation(reservationId).subscribe((feedback) => {
-        this.feedbackForUpdate = feedback;
-        this.selectedReservationCustomer.feedback = feedback;
+        this.feedbackForUpdate = feedback ?? undefined;
+        this.selectedReservationCustomer.feedback = feedback ?? undefined;
 
         const isAnonymous = reservation.customerId === null;
         const hasServiceFeedback = !!feedback?.service;
