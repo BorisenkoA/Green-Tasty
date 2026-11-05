@@ -2,7 +2,10 @@
 
 ## Run locally without AWS
 
-Requirements: Python 3 and Node.js 24.16+ in the 24.x line.
+Requirements: Python 3 and Node.js 24.16+ in the 24.x line. Node.js 26 is not
+supported. The frontend's `.nvmrc` pins Node.js 24.16.0; with `nvm`, run
+`nvm install` and `nvm use` from the frontend directory before installing
+dependencies.
 
 1. From the repository root, start the local API:
 
